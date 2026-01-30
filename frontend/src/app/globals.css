@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+    
+    /* Sidebar colors - light mode */
+    --sidebar: 0 0% 97%;
+    --sidebar-foreground: 222.2 84% 4.9%;
+    --sidebar-muted: 215.4 16.3% 46.9%;
+    --sidebar-accent: 210 40% 93%;
+    --sidebar-border: 214.3 31.8% 91.4%;
+  }
+
+  .dark {
+    /* Lighter dark background - more comfortable */
+    --background: 150 6% 15%;
+    --foreground: 150 8% 96%;
+    
+    /* Card colors with subtle green */
+    --card: 150 8% 17%;
+    --card-foreground: 150 8% 96%;
+    --popover: 150 10% 19%;
+    --popover-foreground: 150 8% 96%;
+    
+    /* Primary green accent */
+    --primary: 142 76% 45%;
+    --primary-foreground: 150 10% 5%;
+    
+    /* Secondary with green tint */
+    --secondary: 150 10% 22%;
+    --secondary-foreground: 150 8% 92%;
+    
+    /* Muted colors */
+    --muted: 150 8% 20%;
+    --muted-foreground: 150 6% 65%;
+    
+    /* Accent green */
+    --accent: 142 70% 40%;
+    --accent-foreground: 150 8% 98%;
+    
+    /* Destructive red */
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 150 8% 98%;
+    
+    /* Borders and inputs */
+    --border: 150 10% 25%;
+    --input: 150 10% 22%;
+    --ring: 142 76% 45%;
+    
+    /* Sidebar colors - lighter dark */
+    --sidebar: 150 10% 13%;
+    --sidebar-foreground: 150 8% 94%;
+    --sidebar-muted: 150 6% 60%;
+    --sidebar-accent: 150 12% 18%;
+    --sidebar-border: 150 8% 24%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Improved focus styles with green ring */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+/* Custom scrollbar with green accent */
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-muted rounded-full;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-primary/30 rounded-full;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/50;
+  }
+}
