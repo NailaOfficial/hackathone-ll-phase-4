@@ -2,32 +2,18 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install uv for fast package installation
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+RUN apt-get update && apt-get install -y build-essential && rm -rf /var/lib/apt/lists/*
 
-# Enable bytecode compilation for faster startup
-ENV UV_COMPILE_BYTECODE=1
-ENV UV_NO_CACHE=1
+COPY pyproject.toml ./
 
-# Step 1: Copy dependency files
-COPY pyproject.toml uv.lock ./
+RUN pip install --upgrade pip && pip install .
 
-# Step 2: Install dependencies (without cache mounts)
-RUN uv sync --frozen --no-dev --no-install-project
-
-# Step 3: Copy the rest of the code
 COPY src/ ./src/
 COPY alembic/ ./alembic/
 COPY alembic.ini ./
 
-# Step 4: Install the project itself (without cache mounts)
-RUN uv sync --frozen --no-dev
-
-# Set working directory to src for correct imports
 WORKDIR /app/src
 
-# Expose port for Railway
 EXPOSE 8000
 
-# Run the app
-CMD ["uv", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
